@@ -1,28 +1,16 @@
 const Product = require('../models/productModel');
-const cloudinary = require('../middleware/cloudinary');
+const cloudinary = require('../config/cloudinaryConfig');
 
 const User = require('../models/userModel');
 const sendEmail = require('../middleware/emailSender');
 
 const createProductwithEmail = async(req, res) => {
     try{
-        // const subject1 = "New Product Created";
-        // const message1 = `
-        // <h3>New product alert</h3>
-        // <p> A new product has been created:</p>
-        // <ul>
-        // <li><strong>Name:</strong>your products are created</li>
-        // <li><strong>Price:</strong>2000</li>
-        // </ul>
-        // `;
-        
-        //     await sendEmail("cgsomto@gmail.com",subject1,message1);
-        
-        
+        const {name, price, quantity} = req.body;
 
-        const {name, price} = req.body;
+        const ImageUrl = req.file ? req.file.path : null; // get cloudinary URL
 
-        const product = new Product({name, price});
+        const product = new Product({name, price, quantity, ImageUrl});
         await product.save();
 
         const admins = await User.find({role: "admin"});
@@ -72,6 +60,9 @@ const updateProductImage = async (req, res) => {
             product
         });
     }catch(err){
+         console.log(err.name);
+    console.log(err.message);
+    console.log(err.stack);
         res.status(500).json({error: err.message});
     }
 };
