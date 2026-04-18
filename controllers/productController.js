@@ -37,8 +37,6 @@ const createProductwithEmail = async(req, res) => {
     }
 }
 const updateProductImage = async (req, res) => {
-      console.log('req.file:', req.file); // 👈 add this
-    console.log('req.params:', req.params); // 👈 and this
     try{
         const productId = req.params.id;
 
