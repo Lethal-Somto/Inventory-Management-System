@@ -12,3 +12,5 @@ const connectDB = async (req, res) => {
 };
 
 module.exports = connectDB;
+
+//mongodb://localhost:27017/inventorydb

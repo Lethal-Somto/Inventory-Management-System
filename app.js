@@ -7,6 +7,8 @@ const productRoute = require('./routes/productRoute');
 
 const userRoute = require('./routes/userRoute');
 
+const fakeStoreRoute = require('./routes/fakeStoreRoute');
+
 const app = express();
 
 app.use(express.json());
@@ -18,6 +20,8 @@ app.use('/api', productRoute);
 
 app.use('/api', userRoute);
 
+app.use('/api', fakeStoreRoute);
+
 app.get('/', (req, res) => {
     res.json({message: "INVENTORY API IS RUNNING PERFECTLY"});
 });
@@ -26,4 +30,6 @@ const PORT = process.env.PORT
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-})
+});
+
+
